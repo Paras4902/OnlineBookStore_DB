@@ -1,0 +1,44 @@
+set line 300
+set feedback off
+
+drop sequence author_id_seq;
+drop sequence publisher_id_seq;
+drop sequence book_id_seq;
+drop sequence customer_id_seq;
+drop sequence shopping_cart_id_seq;
+drop sequence order_id_seq;
+
+create sequence author_id_seq start with 4916 increment by 145;
+create sequence publisher_id_seq start with 1249 increment by 419;
+create sequence book_id_seq start with 7502 increment by 267;
+create sequence customer_id_seq start with 5072 increment by 641;
+create sequence shopping_cart_id_seq start with 3205 increment by 246;
+create sequence order_id_seq start with 100 nocache;
+
+select author_id_seq.nextval as author_id,
+       publisher_id_seq.nextval as publisher_id,
+       book_id_seq.nextval as book_id,
+       customer_id_seq.nextval as customer_id,
+       shopping_cart_id_seq.nextval as shooping_cart_id,
+       order_id_seq.nextval as order_id
+from dual;
+
+/*
+select author_id_seq.currval as author_id,
+       publisher_id_seq.currval as publisher_id,
+       book_id_seq.currval as book_id,
+       customer_id_seq.currval as customer_id,
+       shopping_cart_id_seq.currval as shooping_cart_id,
+       order_id_seq.currval as order_id
+from dual;
+*/
+
+alter sequence author_id_seq restart start with 4916 increment by 145;
+alter sequence publisher_id_seq restart start with 1249 increment by 419;
+alter sequence book_id_seq restart start with 7502 increment by 267;
+alter sequence customer_id_seq restart start with 5072 increment by 641;
+alter sequence shopping_cart_id_seq restart start with 3205 increment by 246;
+alter sequence order_id_seq restart start with 100 nocache;
+
+set line 120 pages 120
+set feedback on

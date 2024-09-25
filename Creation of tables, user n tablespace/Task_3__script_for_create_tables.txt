@@ -1,0 +1,85 @@
+col table_name for a30
+col CONSTRAINT_NAME for a40
+col SEARCH_CONDITION_VC for a35
+set line 120 pages  120
+break on table_name
+set feedback off
+
+drop table authors cascade constraints purge;
+drop table publishers cascade constraints purge;
+drop table books cascade constraints purge;
+drop table credit_card_details cascade constraints purge;
+drop table customers cascade constraints purge;
+drop table shipping_type cascade constraints purge;
+drop table shopping_cart cascade constraints purge;
+drop table order_details cascade constraints purge;
+drop table purchase_history cascade constraints purge;
+
+create table authors (author_id number default author_id_seq.nextval
+                                constraint authors_author_id_pk primary key,
+                      author_name varchar2(70) constraint authors_author_name_nn not null);
+
+create table publishers (publisher_id number default publisher_id_seq.nextval
+                                      constraint publishers_publisher_id_pk primary key,
+                        publisher_name varchar2(70) constraint publishers_publisher_name_nn not null);
+
+create table books (book_id number default book_id_seq.nextval
+                            constraint books_book_id_pk primary key,
+                    book_name varchar2(80) constraint books_book_name_nn not null,
+                    author_id number constraint books_author_id_fk references authors,
+                    price number constraint books_price_nn not null,
+                    pubisher_id number constraint books_publisher_id_fk references publishers,
+constraint books_price_ck check(price >= 0));
+
+create table credit_card_details (credit_card_number number constraint credit_card_details_credit_card_number_pk primary key,
+                                  credit_card_type varchar2(30) constraint credit_card_details_credit_card_type_nn not null,
+                                  col_sysdate date default sysdate,
+                                  expiry_date date constraint credit_card_details_expiry_date_nn not null,
+constraint credit_card_details_expiry_date_ck check(expiry_date>=col_sysdate));
+
+alter table credit_card_details modify col_sysdate invisible;
+
+create table customers (customer_id number default customer_id_seq.nextval
+                                    constraint customers_customer_id_pk primary key,
+                        customer_name varchar2(50) constraint customers_customer_name_nn not null,
+                        street_address varchar2(90),
+                        city varchar2(30),
+                        phone_number number constraint customers_phone_number_nn not null
+                                            constraint customers_phone_number_ck check(length(phone_number)=10),
+                        credit_card_number number constraint customers_credit_card_number_fk references credit_card_details);
+
+create table shipping_type (shipping_type varchar2(20) constraint shipping_type_shipping_type_pk primary key,
+                            shipping_price number constraint shipping_type_shipping_type_nn not null
+                                                  constraint shipping_type_shipping_type_ck check(shipping_price>=0));
+
+create table shopping_cart (shopping_cart_id number default shopping_cart_id_seq.nextval
+                                             constraint shopping_cart_shopping_cart_id_pk primary key,
+                            book_id number constraint shopping_cart_book_id_fk references books,
+                            price number constraint shopping_cart_price_nn not null
+                                         constraint shopping_cart_price_ck check(price>=0),
+                            shopping_cart_date date default sysdate,
+                            quantity number constraint shopping_cart_quantity_ck check(quantity>0));
+
+create table order_details (order_id number default order_id_seq.nextval
+                                     constraint order_details_order_id_pk primary key,
+                            customer_id number constraint order_details_customer_id_fk references customers,
+                            shipping_type varchar2(20) constraint order_details_shipping_type_fk references shipping_type,
+                            date_of_purchase date constraint order_details_date_of_purchase_nn not null,
+                            shopping_cart_id number constraint order_details_shopping_cart_id_fk references shopping_cart);
+
+create table purchase_history (customer_id number constraint purchase_history_customer_id_fk references customers,
+                               order_id number constraint purchase_history_order_id_fk references order_details,
+constraint purchase_history_customer_id_n_order_id_pk primary key(customer_id,order_id));
+
+select 'authors' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('authors');
+select 'publishers' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('publishers');
+select 'books' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('books');
+select 'credit_card_details' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('credit_card_details');
+select 'customers' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('customers');
+select 'shipping_type' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('shipping_type');
+select 'shopping_cart' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('shopping_cart');
+select 'order_details' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('order_details');
+select 'purchase_history' as table_name,constraint_name,constraint_type,search_condition_vc from user_constraints where lower(table_name)=lower('purchase_history');
+
+clear break
+set feedback on

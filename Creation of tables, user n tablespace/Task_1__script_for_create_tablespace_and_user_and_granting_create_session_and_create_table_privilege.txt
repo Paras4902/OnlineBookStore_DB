@@ -1,0 +1,9 @@
+conn sys/Admin123@orclpdb as sysdba
+col file_name for a60
+set line 200
+create tablespace obs datafile 'C:\ORACLE23AI\SQL23\ORADATA\FREE\FREEPDB1\OBS1.dbf' size 100m autoextend on next 10m;
+create user obs identified by obs default tablespace obs quota unlimited on obs;
+grant create session, create table, create sequence, create view, create synonym, create public synonym to obs;
+conn obs/obs@orclpdb
+show con_name
+show user
