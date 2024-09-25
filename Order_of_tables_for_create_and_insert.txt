@@ -1,0 +1,10 @@
+Order of Tables for create and insert:-
+1. Authors
+2. Publishers
+3. Books
+4. Credit_card_details
+5. Customers
+6. Shipping_type
+7. Shopping_cart	
+8. Order_details
+9. Purchase_history
