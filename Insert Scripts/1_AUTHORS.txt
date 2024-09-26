@@ -1,0 +1,11 @@
+INSERT INTO authors (author_name) VALUES ('William Shakespeare');
+INSERT INTO authors (author_name) VALUES ('Jane Austen');
+INSERT INTO authors (author_name) VALUES ('Leo Tolstoy');
+INSERT INTO authors (author_name) VALUES ('Charles Dickens');
+INSERT INTO authors (author_name) VALUES ('Fyodor Dostoevsky');
+INSERT INTO authors (author_name) VALUES ('Agatha Christie');
+INSERT INTO authors (author_name) VALUES ('J.K. Rowling');
+INSERT INTO authors (author_name) VALUES ('Mark Twain');
+INSERT INTO authors (author_name) VALUES ('Ernest Hemingway');
+INSERT INTO authors (author_name) VALUES ('Gabriel García Márquez');
+commit;

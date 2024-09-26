@@ -1,0 +1,11 @@
+insert into shipping_type values('Standard Ground Shipping',200);
+insert into shipping_type values('Expedited Shipping',500);
+insert into shipping_type values('Overnight Shipping',1000);
+insert into shipping_type values('Same-Day Delivery',1500);
+insert into shipping_type values('Flat Rate Shipping',300);
+insert into shipping_type values('Priority Mail',400);
+insert into shipping_type values('International Shipping',2000);
+insert into shipping_type values('Freight Shipping',5000);
+insert into shipping_type values('Local Delivery or Pickup',100);
+insert into shipping_type values('Multiple Addresses',600);
+commit;

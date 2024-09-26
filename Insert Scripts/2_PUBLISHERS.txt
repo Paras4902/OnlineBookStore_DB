@@ -1,0 +1,12 @@
+INSERT INTO publishers(publisher_name) VALUES ('Penguin Random House');
+INSERT INTO publishers(publisher_name) VALUES ('HarperCollins');
+INSERT INTO publishers(publisher_name) VALUES ('Simon and Schuster');
+INSERT INTO publishers(publisher_name) VALUES ('Macmillan Publishers');
+INSERT INTO publishers(publisher_name) VALUES ('Hachette Book Group');
+INSERT INTO publishers(publisher_name) VALUES ('John Wiley and Sons');
+INSERT INTO publishers(publisher_name) VALUES ('Scholastic');
+INSERT INTO publishers(publisher_name) VALUES ('McGraw Hill');
+INSERT INTO publishers(publisher_name) VALUES ('Cengage MindTap series');
+INSERT INTO publishers(publisher_name) VALUES ('Oxford University Press');
+commit;
+
