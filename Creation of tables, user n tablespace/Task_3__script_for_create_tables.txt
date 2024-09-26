@@ -28,7 +28,7 @@ create table books (book_id number default book_id_seq.nextval
                     book_name varchar2(80) constraint books_book_name_nn not null,
                     author_id number constraint books_author_id_fk references authors,
                     price number constraint books_price_nn not null,
-                    pubisher_id number constraint books_publisher_id_fk references publishers,
+                    publisher_id number constraint books_publisher_id_fk references publishers,
 constraint books_price_ck check(price >= 0));
 
 create table credit_card_details (credit_card_number number constraint credit_card_details_credit_card_number_pk primary key,
